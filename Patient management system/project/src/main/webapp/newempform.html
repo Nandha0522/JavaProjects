@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<style>
+	h1{
+		color:green;
+		margin-left:500px;
+		font-family:arial;
+	}
+</style>
+<h1>Add new employee</h1>
+<form action="insertcode.jsp" method="post">
+	<div>
+		<label>PatientName</label>
+		<input type="text" name="name">
+	</div>
+	
+	<div>
+		<label>Patient Mail ID</label>
+		<input type="email" name="mailid">
+	</div>
+	
+	<div>
+		<label>Patient Mobile Number</label>
+		<input type="number" name="mobile">
+	</div>
+
+	<div>
+		<label>Status</label>
+		<select name="dept">
+			<option>Tuberculosis</option>
+			<option>Dengu Fever</option>
+		</select>
+	</div>
+	
+	<div>
+		<label>Date</label>
+		<input type="date" name="doj">
+	</div>
+	
+	<div>
+		<label>Ward No</label>
+		<input type="number" name="salary">
+	</div>
+	
+	<div>
+		<input type="submit">
+	</div>
+	
+</form>
+</body>
+</html>

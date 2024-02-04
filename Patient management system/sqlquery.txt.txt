@@ -1,0 +1,14 @@
+create database projectdb;
+use projectdb;
+create table  patient(
+    patientid int auto_increment primary key,
+    patientname varchar(50)  not null,
+    patientmailid varchar(300) unique not null ,
+    patientmobile bigint unique not null );
+
+
+create table official(
+    offid int  auto_increment primary key,
+    offstatus varchar(30) not null,
+    offward int not null,
+    offdate date not null);

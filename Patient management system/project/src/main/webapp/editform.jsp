@@ -9,55 +9,55 @@
 <body>
 
 <jsp:useBean id="dbobj" class="com.db.DBcode"></jsp:useBean>
-<%@ page import="com.db.Employee" %>
+<%@ page import="com.db.Patient" %>
 <%
 Integer id = (Integer) pageContext.getAttribute("id",PageContext.SESSION_SCOPE);
-Employee emp = dbobj.selectbyid(id);
+Patient pat = dbobj.selectbyid(id);
 %>
 
 
-<h1>Edit Employee Data</h1>
+<h1>Edit Patient Data</h1>
 <form method="post">
 	<div>
 		<label>ID</label>
-		<input type="number" name="id" value="<%= emp.getId() %>" readonly>
+		<input type="number" name="id" value="<%= pat.getId() %>" readonly>
 	</div>
 	
 	<div>
 		<label>Name</label>
-		<input type="text" name="name" value="<%= emp.getName() %>" readonly>
+		<input type="text" name="name" value="<%= pat.getName() %>" readonly>
 	</div>
 	
 	<div>
 		<label>Mail ID</label>
-		<input type="email" name="mailid" value="<%= emp.getMailid() %>">
+		<input type="email" name="mailid" value="<%= pat.getMailid() %>">
 	</div>
 	
 	<div>
 		<label>Mobile Number</label>
-		<input type="number" name="mobile" value="<%= emp.getMobile() %>">
+		<input type="number" name="mobile" value="<%= pat.getMobile() %>">
 	</div>
 	<hr>
 	<div>
-		<label>Department</label>
-		<select name="dept" readonly>
-			<option <%= emp.getstatus().equals("Developer")?"selected":""%>>
-				Developer
+		<label>Status</label>
+		<select name="status" readonly>
+			<option <%= pat.getstatus().equals("heavy fever")?"selected":""%>>
+				heavy fever
 			</option>
-			<option <%= emp.getstatus().equals("Tester")?"selected":""%>>
-				Tester
+			<option <%= pat.getstatus().equals("stomach pain")?"selected":""%>>
+				stomach pain
 			</option>
 		</select>
 	</div>
 	
 	<div>
-		<label>Date of joining</label>
-		<input type="date" name="doj" value="<%= emp.getDoj() %>" readonly>
+		<label>Date</label>
+		<input type="date" name="doj" value="<%= pat.getDoj() %>" readonly>
 	</div>
 	
 	<div>
-		<label>Salary</label>
-		<input type="number" name="salary"  value="<%= emp.getward() %>">
+		<label>Word no</label>
+		<input type="number" name="sword"  value="<%= pat.getward() %>">
 	</div>
 	
 	<div>
@@ -72,10 +72,10 @@ String button = request.getParameter("btn");
 if(button!=null)
 {
 %>
-	<jsp:useBean id="employee" class="com.db.Employee"></jsp:useBean>
-	<jsp:setProperty property="*" name="employee"/>
+	<jsp:useBean id="patient" class="com.db.Patient"></jsp:useBean>
+	<jsp:setProperty property="*" name="patient"/>
 <%
-	int count = dbobj.update(employee);
+	int count = dbobj.update(patient);
 %>
 <jsp:forward page="displaylist.jsp"></jsp:forward>	
 <%	

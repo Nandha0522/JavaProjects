@@ -6,16 +6,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DBcode extends DBconnect{
-	public int insert(Employee employee)
+	public int insert(Patient patient)
 	{
 		int count=0;
 		try
 		{
 			String q1 = "insert into  patient( patientname, patientmailid, patientmobile) values(?,?,?)";
 			PreparedStatement pst = connection.prepareStatement(q1,Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, employee.getName());
-			pst.setString(2, employee.getMailid());
-			pst.setLong(3, employee.getMobile());
+			pst.setString(1,patient.getName());
+			pst.setString(2, patient.getMailid());
+			pst.setLong(3, patient.getMobile());
 			count = pst.executeUpdate();
 			if(count==1) 
 			{
@@ -26,9 +26,9 @@ public class DBcode extends DBconnect{
 				String q2 = "insert into official(offid,offstatus,offdate,offward ) values(?,?,?,?)";
 				PreparedStatement pst2 = connection.prepareStatement(q2);
 				pst2.setInt(1, autoid);
-				pst2.setString(2,employee.getstatus());
-				pst2.setString(3,employee.getDoj());
-				pst2.setInt(4,employee.getId());
+				pst2.setString(2,patient.getstatus());
+				pst2.setString(3,patient.getDoj());
+				pst2.setInt(4,patient.getId());
 				count = pst2.executeUpdate();
 			}
 		}
@@ -38,23 +38,23 @@ public class DBcode extends DBconnect{
 		}
 		return count;
 	}
-	public int update(Employee employee)
+	public int update(Patient patient)
 	{
 		int count=0;
 		try
 		{
 			String q1 = "update patient set patientmailid=?,patientmobile=? where patientid=?";
 			PreparedStatement pst = connection.prepareStatement(q1);
-			pst.setString(1, employee.getMailid());
-			pst.setLong(2, employee.getMobile());
-			pst.setInt(3, employee.getId());
+			pst.setString(1, patient.getMailid());
+			pst.setLong(2, patient.getMobile());
+			pst.setInt(3, patient.getId());
 			count = pst.executeUpdate();
 			if(count==1) //if update in personal table is success
 			{
 				String q2 = "update official set offward=? where offid=?";
 				PreparedStatement pst2 = connection.prepareStatement(q2);
-				pst2.setInt(2,employee.getId());
-				pst2.setInt(1,employee.getward());
+				pst2.setInt(2,patient.getId());
+				pst2.setInt(1,patient.getward());
 				count = pst2.executeUpdate();
 			}
 		}
@@ -87,9 +87,9 @@ public class DBcode extends DBconnect{
 		}
 		return count;
 	}
-	public ArrayList<Employee> selectall()
+	public ArrayList<patient> selectall()
 	{
-		ArrayList<Employee> list = new ArrayList<Employee>();
+		ArrayList<patient> list = new ArrayList<patient>();
 		try
 		{
 			String q="select * from patient inner join official on patientid=offid";
@@ -104,8 +104,8 @@ public class DBcode extends DBconnect{
 				String status = rs.getString("offstatus");
 				int ward = rs.getInt("offward");
 				String date = rs.getString("offdate");
-				Employee emp = new Employee(id, name, mailid, mobile, status, ward, date);
-				list.add(emp);
+				patient pat = new patient(id, name, mailid, mobile, status, ward, date);
+				list.add(pat);
 			}
 		}
 		catch(Exception e)
@@ -114,9 +114,9 @@ public class DBcode extends DBconnect{
 		}
 		return list;
 	}
-	public Employee selectbyid(int id)
+	public Patient selectbyid(int id)
 	{
-		Employee emp = new Employee();
+		Patient pat = new Patient();
 		try
 		{
 			String q="select * from patient inner join official on patientid=offid where patientid=?";
@@ -130,12 +130,12 @@ public class DBcode extends DBconnect{
 			String status = rs.getString("offstatus");
 			int salary = rs.getInt("offward");
 			String doj = rs.getString("offdate");
-			emp = new Employee(id, name, mailid, mobile, status, salary, doj);
+			pat = new Patient(id, name, mailid, mobile, status, salary, doj);
 		}
 		catch(Exception e)
 		{
 			System.out.println(e);
 		}
-		return emp;
+		return pat;
 	}
 }

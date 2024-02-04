@@ -1,6 +1,6 @@
 package com.db;
 
-public class Employee {
+public class Patient {
 	private int id;
 	private String name;
 	private String  mailid;
@@ -8,7 +8,7 @@ public class Employee {
 	private String status ;
 	private int ward;
 	private String doj;
-	public Employee(int id, String name, String mailid, long mobile, String status, int ward, String doj) {
+	public Patient(int id, String name, String mailid, long mobile, String status, int ward, String doj) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -18,7 +18,7 @@ public class Employee {
 		this.ward = ward;
 		this.doj = doj;
 	}
-	public Employee() {
+	public Patient() {
 		super();
 	}
 	public int getId() {
